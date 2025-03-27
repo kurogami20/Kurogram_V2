@@ -6,7 +6,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "seed": "node back/data/seeding.js"
+    "seed": "node ./data/seeding.js"
   },
   "type": "module",
   "keywords": [],
