@@ -6,7 +6,8 @@
     "doc": "docs"
   },
   "scripts": {
-    "seed": "node ./data/seeding.js"
+    "seed": "node ./data/seeding.js",
+    "dev": "node --watch index.js"
   },
   "type": "module",
   "keywords": [],
