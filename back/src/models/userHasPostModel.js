@@ -1,19 +1,17 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../../data/sequelize.js";
 
-class UserPage extends Model {}
+class UserHasPost extends Model {}
 
-UserPage.init(
+UserHasPost.init(
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    idPost: { type: DataTypes.INTEGER },
     idUser: { type: DataTypes.INTEGER },
-    following: { type: DataTypes.INTEGER },
-    follower: { type: DataTypes.INTEGER },
-    bio: { type: DataTypes.TEXT },
   },
   {
     sequelize,
-    tableName: "userPage",
+    tableName: "userHasPost",
 
     timestamps: true,
 
@@ -23,4 +21,4 @@ UserPage.init(
   }
 );
 
-export default UserPage;
+export default UserHasPost;
