@@ -1,3 +1,4 @@
+import { where } from "sequelize";
 import { Post, UserHasPost } from "../models/index.js";
 import { publishSchema } from "../schemas/post.js";
 const postController = {
@@ -21,7 +22,7 @@ const postController = {
       ],
       order: [["id", "DESC"]],
     });
-    res.json(allPosts);
+    res.status(200).json(allPosts);
   },
   async getOne(req, res) {
     const id = Number(req.params.id);
@@ -45,7 +46,7 @@ const postController = {
       ],
       order: [["id", "DESC"]],
     });
-    res.json(onePost);
+    res.status(200).json(onePost);
   },
   async publish(req, res) {
     const idUser = Number(req.params.idUser);
@@ -60,7 +61,7 @@ const postController = {
 
     const verifiedData = publishSchema.parse(postObject);
 
-    await Post.create({
+    const newPost = await Post.create({
       id: verifiedData.idPost,
       postContent: verifiedData.postContent,
       likes: verifiedData.likes,
@@ -69,6 +70,19 @@ const postController = {
       idPost: verifiedData.idPost,
       idUser: verifiedData.userId,
     });
+    res.status(200).json(newPost);
+  },
+  async delete(req, res) {
+    const idPost = Number(req.params.idPost);
+    await UserHasPost.destroy({
+      where: { idPost: idPost },
+    });
+    const deletedpost = await Post.destroy({
+      where: {
+        id: idPost,
+      },
+    });
+    res.status(200).json(deletedpost);
   },
 };
 
