@@ -1,4 +1,3 @@
-import { where } from "sequelize";
 import { Comment } from "../models/index.js";
 import { publishSchema, modifiedSchema } from "../schemas/comment.js";
 const commentController = {
@@ -36,7 +35,17 @@ const commentController = {
     });
     res.status(200).json(modifiedComment);
   },
-  async delete(req, res) {},
+  async delete(req, res) {
+    const idUser = Number(req.params.idUser);
+    const { id, idPost } = req.body;
+    const dataNeeded = {
+      id: id,
+      idUser: idUser,
+      idPost: idPost,
+    };
+    const deletedComment = await Comment.destroy({ where: { ...dataNeeded } });
+    res.status(200).json(deletedComment);
+  },
 };
 
 export default commentController;

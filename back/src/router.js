@@ -15,7 +15,7 @@ postRoute();
 function commentRoute() {
   router.post("/api/v1/comment/:idUser", commentController.publish);
   router.patch("/api/v1/comment/:idUser", commentController.modify);
-  router.delete("/api/v1/comment/:idComment", commentController.delete);
+  router.delete("/api/v1/comment/:idUser", commentController.delete);
 }
 commentRoute();
 
