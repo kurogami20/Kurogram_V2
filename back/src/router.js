@@ -21,7 +21,7 @@ function commentRoute() {
 commentRoute();
 
 function userRoute() {
-  router.post("/api/v1/user/", userController.connect);
+  router.get("/api/v1/user/", userController.connect);
   router.post("/api/v1/user/", userController.create);
   router.patch("/api/v1/user/:idUser", userController.modify);
   router.delete("/api/v1/user/:idUser", userController.delete);
