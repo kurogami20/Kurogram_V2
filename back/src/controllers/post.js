@@ -1,4 +1,3 @@
-import { where } from "sequelize";
 import { Post, UserHasPost } from "../models/index.js";
 import { publishSchema } from "../schemas/post.js";
 const postController = {
