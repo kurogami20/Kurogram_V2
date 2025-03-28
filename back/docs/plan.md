@@ -12,12 +12,14 @@ Il faut se faire une base de données afin de stocker les utilisateurs et leurs 
 
 ### MLD
 
-- utilisateur (CodeUtilisateur, nom d'utilisateur, Email, mot de passe,Bio)
-- Page Utilisateur (CodePageUtilisateur, Nb de posts, Nb d'abonnements,Nb d'abonnés, Posts)
-- posts (CodePost, Photo/vidéo, Nb de likes, Commentaires)
-- Possède (#CodeUtilisateur,#CodePageUtilisateur)
-- Possède (#CodeUtilisateur,#CodePost)
-- Possède (#CodePageUtilisateur,#CodePost)
+- utilisateur (Email, nom d'utilisateur, Email, mot de passe,Bio)
+- Page Utilisateur (Ref.PageUtilisateur, Nb d'abonnements,Nb d'abonnés)
+- Commentaire (Ref.Commentaire,texte)
+- posts (Ref.Post, Contenu, Nb de likes)
+- Possède (#Email,#Ref.PageUtilisateur)
+- Possède (#Email,#Ref.Post)
+- Possède (#Email,#Ref.Commentaire)
+- Possède (#Ref.Post,#Ref.Commentaire)
 
 ## 2: Dépendances
 
