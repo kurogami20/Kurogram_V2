@@ -1,6 +1,7 @@
 import express from "express";
 import postController from "./controllers/post.js";
 import commentController from "./controllers/comment.js";
+import userController from "./controllers/user.js";
 
 const router = express.Router();
 
@@ -18,5 +19,13 @@ function commentRoute() {
   router.delete("/api/v1/comment/:idUser", commentController.delete);
 }
 commentRoute();
+
+function userRoute() {
+  router.post("/api/v1/user/", userController.connect);
+  router.post("/api/v1/user/", userController.create);
+  router.patch("/api/v1/user/:idUser", userController.modify);
+  router.delete("/api/v1/user/:idUser", userController.delete);
+}
+userRoute();
 
 export default router;
