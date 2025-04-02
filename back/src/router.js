@@ -2,6 +2,7 @@ import express from "express";
 import postController from "./controllers/post.js";
 import commentController from "./controllers/comment.js";
 import userController from "./controllers/user.js";
+import { notFound } from "./middleware/error/notFound.js";
 
 const router = express.Router();
 
@@ -27,5 +28,7 @@ function userRoute() {
   router.delete("/api/v1/user/:idUser", userController.delete);
 }
 userRoute();
+
+router.use(notFound)
 
 export default router;
