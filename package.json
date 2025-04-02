@@ -17,5 +17,11 @@
   "bugs": {
     "url": "https://github.com/kurogami20/Kurogram_V2/issues"
   },
-  "homepage": "https://github.com/kurogami20/Kurogram_V2#readme"
+  "homepage": "https://github.com/kurogami20/Kurogram_V2#readme",
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }
