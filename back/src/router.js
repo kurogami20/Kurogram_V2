@@ -3,6 +3,7 @@ import postController from "./controllers/post.js";
 import commentController from "./controllers/comment.js";
 import userController from "./controllers/user.js";
 import { notFound } from "./middleware/error/notFound.js";
+import { internalServerError } from "./middleware/error/internalServerError.js";
 
 const router = express.Router();
 
@@ -11,6 +12,7 @@ function postRoute() {
   router.get("/api/v1/post/:id", postController.getOne);
   router.post("/api/v1/post/:idUser", postController.publish);
   router.delete("/api/v1/post/:idPost", postController.delete);
+  
 }
 postRoute();
 
@@ -28,7 +30,7 @@ function userRoute() {
   router.delete("/api/v1/user/:idUser", userController.delete);
 }
 userRoute();
-
+router.use(internalServerError)
 router.use(notFound)
 
 export default router;

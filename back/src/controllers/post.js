@@ -1,7 +1,7 @@
 import { Post, UserHasPost } from "../models/index.js";
 import { publishSchema } from "../schemas/post.js";
 const postController = {
-  async getAll(req, res) {
+  async getAll(req, res,next) {
     const allPosts = await Post.findAll({
       include: [
         {
@@ -21,9 +21,12 @@ const postController = {
       ],
       order: [["id", "DESC"]],
     });
+    if(!allPosts){
+      next()
+    }
     res.status(200).json(allPosts);
   },
-  async getOne(req, res) {
+  async getOne(req, res,next) {
     const id = Number(req.params.id);
 
     const onePost = await Post.findByPk(id, {
@@ -45,9 +48,12 @@ const postController = {
       ],
       order: [["id", "DESC"]],
     });
+     if(!onePost){
+      next()
+    }
     res.status(200).json(onePost);
   },
-  async publish(req, res) {
+  async publish(req, res,next) {
     const idUser = Number(req.params.idUser);
     const idPost = Number(await Post.max("id")) + 1;
     const { postContent } = req.body;
@@ -69,9 +75,12 @@ const postController = {
       idPost: verifiedData.idPost,
       idUser: verifiedData.userId,
     });
+     if(!newPost){
+      next()
+    }
     res.status(200).json(newPost);
   },
-  async delete(req, res) {
+  async delete(req, res,next) {
     const idPost = Number(req.params.idPost);
     await UserHasPost.destroy({
       where: { idPost: idPost },
@@ -81,6 +90,9 @@ const postController = {
         id: idPost,
       },
     });
+     if(!deletedpost){
+      next()
+    }
     res.status(200).json(deletedpost);
   },
 };
